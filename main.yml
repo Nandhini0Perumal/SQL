@@ -1,5 +1,5 @@
 ---
-- name: Run exe file by disabling UAC
+- name: Copying sql file from local to remote
   hosts: win
   fast_gathering: false
   tasks:
