@@ -1,18 +1,25 @@
---Update Service Option / Communication Server Parameter
+set define off;
+create user SVC_EDFI_DEV identified by svc_edfi_dev
+  default tablespace USERS
+  temporary tablespace TEMP
+  profile SERVICE;
+-- Grant/Revoke role privileges
+grant otpp_app_edfi to SVC_EDFI_DEV;
 
+create user "SVC_EDFI_DEV@XXXX.COM"
+  identified externally
+  default tablespace USERS
+  temporary tablespace TEMP
+  profile SERVICE;
+  
+grant XXXX_app_edfi to "{{var_1}}@XXXX.COM";
+grant XXXX_app_olf to "{{var_1}}@XXXX.COM";
+grant XXXX_app_scd to "{{var_1}}@XXXX.COM";
 
-ALTER TABLE scdat.comsrvcnfpars DISABLE ALL TRIGGERS;
+create user "SVC_IISPRIMEDEV@XXXX.COM"
+  identified externally
+  default tablespace USERS
+  temporary tablespace TEMP
+  profile SERVICE;
 
-delete from Comsrvcnfpars;
-
-insert into comsrvcnfpars (CSCNFPAR, CSPW, CSTEXT, CSINSTTYPE);
-values ('SCD_PATH', 0, 'V:\ims\SC_Fast_Track\Project\FADM\ISUP\SCDimension);
-
-insert into Comsrvcnfpars (CSCNFPAR, CSPW, CSTEXT, CSTEXTPW, CSINSTTYPE);
-values ('IN_OUT_DIR', 0, '\\{{mucs_primary_node_short}}\{{ app_env_name}});
-
-insert into Comsrvcnfpars (CSCNFPAR, CSPW, CSTEXT, CSTEXTPW, CSINSTTYPE);
-values ('SERVERNAME', 0, 'APPSRVDEV11', NULL, ' ');
-
-commit;
 
