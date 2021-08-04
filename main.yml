@@ -11,7 +11,7 @@
     - name: Copying the sql file to windows sharefolder
       win_copy:
         src: "/tmp/{{sql_file}}.sql"
-        dest: "\\560\delphix_scripts\level3\"
+        dest: "\\\560\\delphix_scripts\\level3\\"
         remote_src: no
         
     - name: Copying the sql file to windows sharefolder
