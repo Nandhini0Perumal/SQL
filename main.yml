@@ -1,25 +1,21 @@
 ---
-- hosts: myWindowsNode
-  vars:
-    ansible_user: mywinusername
-    ansible_password: Password    
-    ansible_port: 5986
-    ansible_connection: winrm
-    ansible_winrm_transport: credssp
-    ansible_winrm_server_cert_validation: validate
-
+- name: Run exe file by disabling UAC
+  hosts: win
+  fast_gathering: false
   tasks:
-  - name: create the folder called "TheNewFolder"
-    win_file:
-      path: "//myFileSEerver01/MySharedFolder/TheNewFolder"
-      state: directory
+    - name: Converting jinja file to sql 
+      template:
+        src: sql_file.j2
+        dest: "/tmp/{{sql_file}}.sql"
 
-  - name: Copy file to windows remote
-    win_copy :
-      src: "/home/app/backup/1//de85cfa1-cb41-53ca-aba0-0e3dd728c27b//test.zip"
-      dest: "c:\my_app_home\"
-      remote_src: no
-  - name: Create a file from a Jinja2 template
-    template:
-      src: /mytemplates/file.conf.j2
-      dest: C:\Temp\file.conf
+    - name: Copying the sql file to windows sharefolder
+      win_copy:
+        src: "/tmp/{{sql_file}}.sql"
+        dest: "\\560\delphix_scripts\level3\"
+        remote_src: no
+        
+    - name: Copying the sql file to windows sharefolder
+      win_copy:
+        src: /tmp/sql_file.sql
+        dest: "\\560\delphix_scripts\level3\"
+        remote_src: no
