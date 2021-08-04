@@ -15,7 +15,9 @@
         remote_src: no
         
     - name: Copying the sql file to windows sharefolder
-      win_copy:
-        src: /tmp/sql_file.sql
-        dest: "\\560\delphix_scripts\level3\"
-        remote_src: no
+      win_lineinfile:
+        dest: "\\560\delphix_scripts\level3\executable_filename.ps1"
+        state: present
+        regexp: .*\.sql$
+        line: "{{sql_file}}.sql"
+        state: present
