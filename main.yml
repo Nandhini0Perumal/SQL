@@ -3,22 +3,4 @@
   hosts: win
   fast_gathering: false
   tasks:
-    - name: Converting jinja file to sql 
-      template:
-        src: sql_file.j2
-        dest: "/tmp/{{sql_file}}.sql"
 
-    - name: Copying the sql file to windows sharefolder
-      win_copy:
-        src: "/tmp/{{sql_file}}.sql"
-        dest: "\\560\delphix_scripts\level3\"
-        remote_src: no   
-        
-    - name: Modifying the filename in the executable script
-      become: yes
-      win_lineinfile:
-        path: "\\560\delphix_scripts\level3\executable_filename.ps1"
-        regexp: .*\.sql$
-        line: "{{sql_file}}.sql"
-        state: present
-      register: modified_result
