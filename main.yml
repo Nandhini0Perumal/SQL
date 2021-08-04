@@ -1,6 +1,8 @@
 ---
-- name: Copying sql file from local to remote
+- name: Copying sql file from local to remote and modifying content in executable file
   hosts: win
-  fast_gathering: false
+  gather_facts: true
   tasks:
+    - include_role:
+        name: Validation
 
