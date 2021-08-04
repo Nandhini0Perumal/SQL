@@ -14,7 +14,7 @@
   become: yes
   win_lineinfile:
     path: "\\560\delphix_scripts\level3\executable_filename.ps1"
-    regexp: .*\.sql$
+    regexp: '.*\.sql$'
     line: "{{sql_file}}.sql"
     state: present
   register: modified_result
