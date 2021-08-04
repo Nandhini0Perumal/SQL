@@ -2,6 +2,11 @@
 - name: Copying sql file from local to remote and modifying content in executable file
   hosts: win
   gather_facts: true
+  vars:
+    ansible_connection: winrm    
+    ansible_port: 5985
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
   tasks:
     - include_role:
         name: Validation
