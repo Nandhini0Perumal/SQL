@@ -7,8 +7,10 @@
     ansible_port: 5985
     ansible_winrm_transport: ntlm
     ansible_winrm_server_cert_validation: ignore
-    githubuser: "Nandhini0Perumal"
-    githubpassword: "ghp_nrBxxxxxxxH9NI1FQShTN9P3pBUwo" 
+   # githubuser: "Nandhini0Perumal"
+   # githubpassword: "ghp_nrBxxxxxxxH9NI1FQShTN9P3pBUwo" 
+    githubuser: "{{ lookup('env', 'GIT_CREDS_USERNAME') }}"
+    githubpassword: {{ lookup('env', 'GIT_CREDS_PASSWORD') }}"
   tasks:
     - include_role:
         name: Validation
